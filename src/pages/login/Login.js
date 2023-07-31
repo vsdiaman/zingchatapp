@@ -1,89 +1,78 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import './styles.css'
+import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 
-import "./styles.css";
+const Login = () => {
+  const [username, setUsename] = useState('')
+  const [password, setPassword] = useState('')
+  const [loggedIn, setLoggedIn] = useState(false)
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      name: "",
-      password: "",
-      confirmPassword: "",
-      email: "",
-      message: "",
-    };
+  // Envia os dados do fomulário para o servidor via POST
+
+  const handleLogin = () => {
+    axios
+      .post('http://localhost:5000/api/login', { username, password })
+      .then((res) => {
+        const { token } = res.data
+        // Aqui pode salvar o token no localstorage
+        setLoggedIn(true)
+        console.log('Você logou.')
+        console.log('Token JWT:', token)
+      })
+      .catch((err) => {
+        console.log('Erro ao realizar o login:', err)
+      })
   }
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    this.state({ [name]: value });
-  };
 
-  handleSubmit = (event) => {
-    event.preventDefault(); //é um método de complemento que pode ser usado para previnir a ação padrão do evento que estiver acontecendo.
-    // const { username, password } = this.state;
-    // enviar os dados para um servidor para autenticação
-    // atualizar o estado "message" com base na resposta do servidor
-    // Implemente aqui a lógica de envio dos dados do formulário para o servidor
-  };
-  render() {
-    const { username, name, password, confirmPassword, email, message } =
-      this.state;
-    return (
-      <div class="container">
-        <div class="forms">
-          <div class="form login">
-            <span class="title">Login</span>
-
-            <form onSubmit={this.handleSubmit} action="#">
-              <div class="input-field">
+  return (
+    <div>
+      <div className="container">
+        <div className="forms">
+          <div className="form login">
+            <span className="title">Login</span>
+            <form action="#">
+              <div className="input-field">
                 <input
-                  value={email}
+                  value={username}
                   type="text"
                   placeholder="Enter your email"
                   required
+                  onChange={(e) => setUsename(e.target.value)}
                 />
                 <FontAwesomeIcon className="i" icon={faEnvelope} size="sm" />
-                {/* <i class="uil uil-envelope icon"></i> */}
               </div>
-              <div class="input-field">
+              <div className="input-field">
                 <input
                   value={password}
                   type="password"
-                  class="password"
+                  className="password"
                   placeholder="Enter your password"
                   required
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <FontAwesomeIcon className="i" icon={faLock} />
-                <i class="uil uil-lock icon"></i>
-                <i class="uil uil-eye-slash showHidePw"></i>
+                <i className="uil uil-lock icon"></i>
+                <i className="uil uil-eye-slash showHidePw"></i>
               </div>
-
-              <div class="checkbox-text">
-                <div class="checkbox-content">
-                  <input type="checkbox" id="logCheck" />
-                  <label for="logCheck" class="text">
-                    Remember me
-                  </label>
-                </div>
-
-                <a href="#" class="text">
-                  Forgot password?
-                </a>
+              <div>
+                <label htmlFor="logCheck" className="text">
+                  Remember me
+                </label>
               </div>
-
-              <div class="input-field button">
-                <input type="button" value="Login" />
+              <a href="#" className="text">
+                Forgot password?
+              </a>
+              <div className="input-field button">
+                <input type="button" value="Login" onClick={handleLogin} />
               </div>
             </form>
-
-            <div class="login-signup">
-              <span class="text">
+            <div className="login-signup">
+              <span className="text">
                 Not a member?
-                <a href="/register" class="text signup-link">
+                <a href="/register" className="text signup-link">
                   Signup Now
                 </a>
               </span>
@@ -91,8 +80,8 @@ class Login extends Component {
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  )
 }
 
-export default Login;
+export default Login
