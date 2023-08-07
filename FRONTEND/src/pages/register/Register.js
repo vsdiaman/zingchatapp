@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 
-import './styles.css'
+import './css/styles.css'
 
 class Register extends Component {
   constructor(props) {
@@ -35,47 +35,43 @@ class Register extends Component {
     const { username, name, password, confirmPassword, email, message } =
       this.state
     return (
-      <div className="container">
+      <div className="register-container">
         <div className="forms">
-          <div className="form login">
-            <span className="title">Registration</span>
+          <div className="register-form">
+            <span className="register-title">Registration</span>
 
             <form onSubmit={this.handleSubmit} action="#">
-              <div className="input-field">
+              <div className="register-input-field">
+                <FontAwesomeIcon className="register-i" icon={faUser} />
                 <input
                   value={name}
                   type="text"
                   placeholder="Enter your name"
                   required
-                />
-                <FontAwesomeIcon className="i" icon={faUser} size="sm" />
-                {/* <i class="uil uil-envelope icon"></i> */}
+                ></input>
               </div>
-              <div className="input-field">
+              <div className="register-input-field">
+                <FontAwesomeIcon className="register-i" icon={faEnvelope} />
                 <input
                   value={email}
                   type="text"
-                  placeholder="Enter your email"
+                  placeholder="Enter your e-mail"
                   required
-                />
-                <FontAwesomeIcon className="i" icon={faEnvelope} size="sm" />
-                {/* <i class="uil uil-envelope icon"></i> */}
+                ></input>
               </div>
-              <div className="input-field">
+              <div className="register-input-field">
+                <FontAwesomeIcon className="register-i" icon={faLock} />
                 <input
                   value={password}
                   type="password"
                   className="password"
                   placeholder="Enter your password"
                   required
-                />
-                <FontAwesomeIcon className="i" icon={faLock} />
-                <i className="uil uil-lock icon"></i>
-                <i className="uil uil-eye-slash showHidePw"></i>
+                ></input>
               </div>
-              npm i eslint
-              <div className="input-field button">
-                <input type="button" value="Signup" />
+              <div className="button-container">
+                {/* <FontAwesomeIcon className="i" icon={faLock} /> */}
+                <button className="input-field-button"> Signup </button>
               </div>
             </form>
 

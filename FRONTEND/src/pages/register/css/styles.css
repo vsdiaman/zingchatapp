@@ -1,0 +1,70 @@
+/* ===== Google Font Import - Poformsins ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inika&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=Inika&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@500&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body{
+  background-color: #fcf6ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  animation-name: animation;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;    
+    animation-play-state: running;
+}
+
+@keyframes animation {
+  50.0%  {background-color:rgb(228, 228, 228);}
+}
+
+.register-container {
+    width: 702px;
+    height: 550px;
+    border-radius: 20px;
+    background: linear-gradient(315deg, #cacaca, #f0f0f0);
+  box-shadow:  -15px -15px 16px #c3c3c3,
+               15px 15px 16px #fdfdfd;
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    width: 426px;
+    height: 550px;
+    background: #FF6464;
+    border-radius: 20px 200px 40px 20px;
+    text-align: center;
+    align-items: center;
+    box-shadow:  -28px 28px 53px #c3c3c3,
+    28px -28px 53px #fdfdfd;
+  }
+
+  .register-title {
+    color: #ffffff;
+    text-align: center;
+    font-family: Indie Flower;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    /* position: relative; */
+    margin: 40px;  
+  }
+
+  .register-i {
+    position: relative; /* Adiciona posição relativa para posicionamento do ícone */
+    display: inline-block;
+    color: #00000031;
+    left: 30px;
+    width: 15px;
+  }

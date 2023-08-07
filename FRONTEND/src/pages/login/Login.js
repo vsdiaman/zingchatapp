@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
-import './styles.css'
 import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom'
 // import { response } from 'express'
+import './css/styles.css'
 
 const Login = () => {
   const [username, setUsename] = useState('')
@@ -37,50 +37,56 @@ const Login = () => {
 
   return (
     <div>
-      <div className="container">
+      <div className="login-container">
         <div className="forms">
-          <div className="form login">
-            <span className="title">Login</span>
+          <div className="login-formlogin">
+            <h1 className="login-title">Welcome</h1>
             <form action="#">
               <div className="input-field">
+                <FontAwesomeIcon className="login-i" icon={faEnvelope} />
                 <input
                   value={username}
                   type="text"
                   placeholder="Enter your email"
                   required
                   onChange={(e) => setUsename(e.target.value)}
-                />
-                <FontAwesomeIcon className="i" icon={faEnvelope} size="sm" />
+                ></input>
               </div>
               <div className="input-field">
-                <input
-                  value={password}
-                  type="password"
-                  className="password"
-                  placeholder="Enter your password"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <FontAwesomeIcon className="i" icon={faLock} />
-                <i className="uil uil-lock icon"></i>
-                <i className="uil uil-eye-slash showHidePw"></i>
-              </div>
-              <div>
-                <label htmlFor="logCheck" className="text">
-                  Remember me
+                <FontAwesomeIcon className="login-i" icon={faLock} />
+                <label>
+                  <input
+                    value={password}
+                    type="password"
+                    className="password"
+                    placeholder="Enter your password"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                  ></input>
+                  <div className="login-link-container">
+                    <a href="#" className="remember">
+                      Remember me
+                    </a>
+                    <a href="#" className="forgot-password">
+                      Forgot password ?
+                    </a>
+                  </div>
                 </label>
               </div>
-              <a href="#" className="text">
-                Forgot password?
-              </a>
-              <div className="input-field button">
-                <input type="button" value="Login" onClick={handleLogin} />
+              <div className="button-container">
+                {/* <FontAwesomeIcon className="i" icon={faLock} /> */}
+                <button className="input-field-button" onClick={handleLogin}>
+                  Submit
+                </button>
               </div>
+              {/* <div className="input-field button">
+                <input type="button" value="Login" onClick={handleLogin} />
+              </div> */}
             </form>
             <div className="login-signup">
               <span className="text">
                 Not a member?
-                <a href="/register" className="text signup-link">
+                <a href="/register" className="signup-link">
                   Signup Now
                 </a>
               </span>

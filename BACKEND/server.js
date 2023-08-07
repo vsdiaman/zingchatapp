@@ -47,7 +47,7 @@ app.post('/api/login', (req, res) => {
   return res.json({ message: 'Logi!', token })
 })
 
-// Rota protegida que requer autenticação
+// Rota protegida que requer autenticaçãoGET http://localhost:8080/ 500 (Internal Server Error)
 app.get('/api/proteted', (req, res) => {
   // Obtem o token do cabeçalho da requisição
   const token = req.headers.authorization
