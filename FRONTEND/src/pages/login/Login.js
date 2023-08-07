@@ -20,9 +20,9 @@ const Login = () => {
       .then((res) => {
         const { token } = res.data
         // event.preventDefault()
-        localStorage.setItem('token,', token)
-        localStorage.setItem('username,', username)
-        localStorage.setItem('password,', password)
+        localStorage.setItem('token', token)
+        localStorage.setItem('username', username)
+        localStorage.setItem('password', password)
         // Aqui pode salvar o token no localstorage
         navigate('/logado')
         setLoggedIn(true)
@@ -50,7 +50,7 @@ const Login = () => {
                   placeholder="Enter your email"
                   required
                   onChange={(e) => setUsename(e.target.value)}
-                ></input>
+                />
               </div>
               <div className="input-field">
                 <FontAwesomeIcon className="login-i" icon={faLock} />
@@ -62,7 +62,7 @@ const Login = () => {
                     placeholder="Enter your password"
                     required
                     onChange={(e) => setPassword(e.target.value)}
-                  ></input>
+                  />
                   <div className="login-link-container">
                     <a href="#" className="remember">
                       Remember me
@@ -75,7 +75,12 @@ const Login = () => {
               </div>
               <div className="button-container">
                 {/* <FontAwesomeIcon className="i" icon={faLock} /> */}
-                <button className="input-field-button" onClick={handleLogin}>
+                <button
+                  type="button"
+                  className="input-field-button"
+                  value={Login}
+                  onClick={handleLogin}
+                >
                   Submit
                 </button>
               </div>
