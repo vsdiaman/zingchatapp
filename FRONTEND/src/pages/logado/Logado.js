@@ -9,7 +9,14 @@ const Logado = () => {
       <div className="item-container">
         <div className="item3">Item 3</div>
         <div className="item4">Item 4</div>
-        <div className="item5">Item 5</div>
+        <div className="item5">
+          <input
+            className="message"
+            type="text"
+            placeholder="message"
+            required
+          />
+        </div>
       </div>
     </div>
   )

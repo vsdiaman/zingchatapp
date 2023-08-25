@@ -1,77 +1,32 @@
-const express = require('express')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const apiRoutes = require('./routes/api');
+const { Sequelize } = require('sequelize'); // Importe o Sequelize
+const config = require('./config/config'); // Importe as configurações
 
-const jwt = require('jsonwebtoken')
+const app = express();
 
-const bodyParser = require('body-parser')
+app.use(cors());
+app.use(bodyParser.json());
 
-const app = express()
+const sequelize = new Sequelize(config.development);
 
-const cors = require('cors')
+require('dotenv').config(); // Importe e configure o dotenv
+// Teste a conexão com o banco de dados
 
-const crypto = require('crypto')
-
-app.use(bodyParser.json())
-
-app.use(cors())
-
-const PORT = 5000
-
-function generateRadomToken(length) {
-  return crypto.randomBytes(length).toString('hex')
-}
-
-// Gera um token de 32 caracteres
-// Chave secreta para assinar os tokens;
-const secretKey = generateRadomToken(32)
-
-// Usuários
-const users = [
-  { id: 1, username: 'vitor', password: 'senha1' },
-  { id: 2, username: 'gabriel', password: 'senha2' },
-]
-// Rota de login
-app.post('/api/login', (req, res) => {
-  const { username, password } = req.body
-
-  // Simulação de autenticação em memóriajulia larangeiras
-  const user = users.find(
-    (user) => user.username === username && user.password === password,
-  )
-  if (!user) {
-    return res.status(401).json({ mesage: 'Credenciais inválidas!' })
-  }
-
-  // Cria um token JWT após o login
-  const token = jwt.sign({ userId: user.id }, secretKey)
-
-  return res.json({ message: 'Logi!', token })
-})
-
-// Rota protegida que requer autenticaçãoGET http://localhost:8080/ 500 (Internal Server Error)
-app.get('/api/proteted', (req, res) => {
-  // Obtem o token do cabeçalho da requisição
-  const token = req.headers.authorization
-
-  if (!token) {
-    return res.status(401).json({ message: 'Acesso não autorizado!' })
-  }
-
-  // Verifica e decodifica o token
-  jwt.verify(token, secretKey, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ message: 'Acesso não autorizado!' })
-    }
-
-    // Token é valido, pode prosseguir para a rota protegidasecretKey
-    // Aqui é implementar a lógica para retornar os dados especificos da rota protegida
-    return res.json({ message: 'Acesso autorizado, dados protegidos!' })
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Conexão com o banco de dados estabelecida com sucesso.');
   })
-})
+  .catch(err => {
+    console.error('Erro na conexão com o banco de dados:', err);
+  });
+app.use('/api', apiRoutes);
 
-app.get('/', (req, res) => {
-  res.send('Hello World usando metodo get!')
-})
+const PORT = 5000;
 
 app.listen(PORT, () => {
-  console.log(`Servitor rodando na porta: ${PORT}`)
-})
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
