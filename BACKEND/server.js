@@ -10,10 +10,16 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize(config.development);
+// const sequelize = new Sequelize(config.development);
 
 require('dotenv').config(); // Importe e configure o dotenv
 // Teste a conexão com o banco de dados
+
+// Variavel para conectar com o banco de dados https://sequelize.org/docs/v6/getting-started/
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: 'mysql'
+});
 
 sequelize
   .authenticate()

@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 
 module.exports = {
   development: {
@@ -10,19 +10,16 @@ module.exports = {
   },
   test: {
     username: 'root',
-    password: '123456789',
-    database: 'zingDataBase',
+    password: 'null',
+    database: 'database_test',
     host: 'localhost',
     dialect: 'mysql'
   },
   production: {
     username: 'root',
-    password: '123456789',
-    database: 'zingDataBase',
+    password: 'null',
+    database: 'databse_production',
     host: 'localhost',
     dialect: 'mysql'
   }
 };
-
-// NOTA
-// E AQUI Q ESTA HAVENDO PROBLEMA DE CONECCAO COM O BANCO HOST 127.0.0.1
