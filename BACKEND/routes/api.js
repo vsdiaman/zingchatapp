@@ -6,13 +6,13 @@ const User = require('../models/User');
 
 router.post('/login', authController.login);
 
-router.post('/cadastrar', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const {name, username, email, password} = req.body;
-        const user = await User.create({username: username, email: email, password: password})
+        const user = await User.create({username: username, email: email, password: password, name: name})
         res.status(201).json({ message: 'Usuário cadastrado com sucesso.'})
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json(`Erro, usuário não cadastrado: ${err.message}`)
     }
 })
 

@@ -8,26 +8,34 @@ import './css/styles.css'
 
 const Login = () => {
   const [username, setUsename] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
   const [webtoken, setWebtoken] = useState('')
+
   const navigate = useNavigate()
   // Envia os dados do fomulário para o servidor via POST
+  const API_URL = 'http://localhost:5000/api'
 
   const handleLogin = async (event) => {
+    event.preventDefault()
     await axios
-      .post('http://localhost:5000/api/login', { username, password })
+      .post(`${API_URL}/login`, { email, username, password })
       .then((res) => {
         const { token } = res.data
         // event.preventDefault()
         localStorage.setItem('token', token)
+        // localStorage.setItem('username', username)
         localStorage.setItem('username', username)
+        localStorage.setItem('email', email)
         localStorage.setItem('password', password)
         // Aqui pode salvar o token no localstorage
         navigate('/logado')
         setLoggedIn(true)
         // console.log('Você logou.')
         console.log('Token JWT:', token)
+        console.log('Usuário:', username)
+        console.log('Email: ', email)
       })
       .catch((err) => {
         console.log('Erro ao realizar o login:', err)
@@ -45,11 +53,11 @@ const Login = () => {
               <div className="input-field">
                 <FontAwesomeIcon className="login-i" icon={faEnvelope} />
                 <input
-                  value={username}
-                  type="text"
+                  value={email}
+                  type="email"
                   placeholder="Enter your email"
                   required
-                  onChange={(e) => setUsename(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="input-field">

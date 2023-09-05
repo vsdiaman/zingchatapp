@@ -29,6 +29,7 @@ sequelize
   .catch(err => {
     console.error('Erro na conexão com o banco de dados:', err);
   });
+  
 app.use('/api', apiRoutes);
 
 const PORT = 5000;

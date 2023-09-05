@@ -1,4 +1,3 @@
-// models/user.js
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
@@ -18,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
+
+  module.exports = User;
 
   User.associate = models => {
       User.hasMany(models.Message, { foreignKey: 'userId' });

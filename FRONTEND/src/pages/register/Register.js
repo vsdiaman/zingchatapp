@@ -6,10 +6,10 @@ import './css/styles.css'
 
 function Register() {
   const [formData, setFormData] = useState({
-    nome: '',
+    name: '',
     username: '',
     email: '',
-    senha: '',
+    password: '',
   })
 
   const handleChange = (event) => {
@@ -20,14 +20,20 @@ function Register() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const API_URL = 'http://localhost:5000/api'
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     // Aqui você pode adicionar lógica para lidar com o envio do formulário
     try {
-      const response = axios.post('/usuarios/cadastrar', formData)
-      console.log(response.data) // Recebe a resposta do servidor
+      const response = await axios.post(`${API_URL}/register`, formData)
+      if (response.status === 201 || response.status === 200) {
+        console.log(`${response.data} Usuário cadastrado com sucesso.`) // Recebe a resposta do servidor
+      } else {
+        console.log(`${response.statusText} - Erro ao cadastrar o usuário.`) // Recebe a resposta do servidor
+      }
     } catch (error) {
-      console.error(error)
+      console.error(`Error: ${error.message} - Erro ao cadastrar o usuário.`)
     }
   }
 
@@ -41,10 +47,21 @@ function Register() {
             <div className="register-input-field">
               <FontAwesomeIcon className="register-i" icon={faUser} />
               <input
-                value={formData.nome}
+                value={formData.name}
                 type="text"
-                name="nome"
+                name="name"
                 placeholder="Enter your name"
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <div className="register-input-field">
+              <FontAwesomeIcon className="register-i" icon={faUser} />
+              <input
+                value={formData.username}
+                type="text"
+                name="username"
+                placeholder="Enter your nickname"
                 required
                 onChange={handleChange}
               />
@@ -63,9 +80,9 @@ function Register() {
             <div className="register-input-field">
               <FontAwesomeIcon className="register-i" icon={faLock} />
               <input
-                value={formData.senha}
+                value={formData.password}
                 type="password"
-                name="senha"
+                name="password"
                 className="password"
                 placeholder="Enter your password"
                 required

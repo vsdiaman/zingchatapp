@@ -12,11 +12,11 @@ const secretKey = generateRadomToken(32)
 
 module.exports = {
   async login(req, res) {
-    const { username, password } = req.body;
+    const {email, password } = req.body;
 
     try {
       const user = await User.findOne({
-        where: { username, password },
+        where: {email, password },
       });
 
       if (!user) {
